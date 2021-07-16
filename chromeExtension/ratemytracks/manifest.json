@@ -3,14 +3,12 @@
   "description": "RateMyTracks provides you with helpful insights into professors at the University of Alberta while browsing Beartracks.",
   "version": "1.0",
   "manifest_version": 3,
-  "action": {
-    "default_icon": {
-      "16": "/images/logo16.png",
-      "32": "/images/logo32.png",
-      "48": "/images/logo48.png",
-        "128": "/images/logo128.png"
-    }
-  },  
+  "icons": {
+    "16": "/images/logo16.png",
+    "32": "/images/logo32.png",
+    "48": "/images/logo48.png",
+    "128": "/images/logo128.png"
+  },
   "content_scripts": [
     {
       "matches": ["https://www.beartracks.ualberta.ca/*"],
