@@ -6,7 +6,6 @@ if (instructors.length) {
     body = table.children[1].children[0]
 
     ratingHeader = head.insertCell(7)
-
-    // ratingHeader.innerHTML =
-
+    ratingHeader.outerHTML = "<th>Rating</th>"
+    head.children[7].classList.add("ps_grid-col")
 }
