@@ -1,5 +1,11 @@
 instructors = document.getElementsByClassName("ps_grid-col INSTRUCTOR");
 
+const colorMapping = {
+  "poor": "#ea373d",
+  "average": "#FFF27D",
+  "good": "#6BD175"
+}
+
 if (instructors.length) {
   fetch(chrome.runtime.getURL("profData.json"))
     .then((resp) => resp.json())
@@ -11,7 +17,7 @@ if (instructors.length) {
       addRatingHeader(head);
       addRowRating(rows, data);
     })
-    .catch((err) => console.err(err));
+    .catch((err) => console.error(err));
 }
 
 function addRatingHeader(head) {
@@ -25,24 +31,31 @@ function addRowRating(rows, data) {
     row.children[7].outerHTML = "<td><div><div><span></span></div></div></td>";
     row.children[7].className = "ps_grid-cell RATING psc_valign-top";
 
-    // const seats = row.querySelector(".SEATS").children[0].children[0]
-
-    const fullName = row
-      .querySelector(".INSTRUCTOR")
-      .children[0].children[0].children[0].innerHTML.toLowerCase();
+    const prof = row.querySelector(".INSTRUCTOR").children[0].children[0].children[0]
+    const originalName = prof.innerHTML
+    const fullName = originalName.toLowerCase();
     const splitName = fullName.split(",");
     const shortName = splitName[0] + "," + splitName[1].split(" ")[0];
 
     let rating = "N/A";
+    let color = "white";
     if (fullName in data) {
       if (data[fullName]["profRating"] !== -1.0) {
         rating = data[fullName]["profRating"].toFixed(1);
+        color = colorMapping[data[fullName]["profRatingClass"]];
+        prof.innerHTML = `<a>${originalName}</a>`
+        prof.children[0].href = data[fullName]["profUrl"]
       }
     } else if (shortName in data) {
       if (data[shortName]["profRating"] !== -1.0) {
         rating = data[shortName]["profRating"].toFixed(1);
+        color = colorMapping[data[shortName]["profRatingClass"]];
+        prof.innerHTML = `<a>${originalName}</a>`
+        prof.children[0].href = data[shortName]["profUrl"]
       }
     }
     row.children[7].innerHTML = rating;
+    row.children[7].style.fontWeight = "bold"
+    row.children[7].style.backgroundColor = color;
   }
 }
