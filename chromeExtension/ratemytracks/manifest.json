@@ -14,5 +14,11 @@
       "matches": ["https://www.beartracks.ualberta.ca/*"],
       "js": ["main.js"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["profData.json"],
+      "matches": ["https://www.beartracks.ualberta.ca/*"]
+    }
   ]
 }

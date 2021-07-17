@@ -22,7 +22,7 @@ while profsRemaining:
 
     for prof in profs:
         profUrl = PROF_URL + str(prof["tid"])
-        profName = prof["tLname"].lower() + ", " + prof["tFname"].lower()
+        profName = prof["tLname"].lower() + "," + prof["tFname"].lower()
         profRating = float(prof["overall_rating"]
                            ) if prof["overall_rating"] != "N/A" else -1.0
         profRatingClass = prof["rating_class"]  # zero, poor, average, good
@@ -33,7 +33,7 @@ while profsRemaining:
         }
         if prof["tMiddlename"]:
             profNameMiddle = prof["tLname"].lower(
-            ) + ", " + prof["tFname"].lower() + " " + prof["tMiddlename"].lower()
+            ) + "," + prof["tFname"].lower() + " " + prof["tMiddlename"].lower()
             profDict[profNameMiddle] = {
                 "profUrl": profUrl,
                 "profRating": profRating,
