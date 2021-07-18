@@ -12,6 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.beartracks.ualberta.ca/*"],
+      "run_at": "document_end",
       "js": ["main.js"]
     }
   ],
