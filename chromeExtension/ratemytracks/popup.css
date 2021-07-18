@@ -35,3 +35,15 @@
 .disabled:hover {
     background-color: #c82333 !important;
 }
+
+#popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    padding-top: 1em;
+    color: black
+}

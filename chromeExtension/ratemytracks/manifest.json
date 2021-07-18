@@ -1,6 +1,6 @@
 {
   "name": "RateMyTracks",
-  "description": "RateMyTracks provides you with helpful insights into professors at the University of Alberta while browsing Beartracks.",
+  "description": "Get valuable insights into professors at the University of Alberta while browsing Beartracks.",
   "version": "1.0",
   "manifest_version": 3,
   "icons": {
@@ -25,6 +25,9 @@
       "js": ["main.js"]
     }
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "web_accessible_resources": [
     {
       "resources": ["profData.json"],

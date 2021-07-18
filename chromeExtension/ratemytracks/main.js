@@ -25,7 +25,7 @@ try {
 
 function setUp() {
   chrome.storage.sync.get("enabled", (data) => {
-    if (data.enabled) {
+    if (Boolean(data.enabled)) {
       fetch(chrome.runtime.getURL("profData.json"))
         .then((resp) => resp.json())
         .then((data) => {
