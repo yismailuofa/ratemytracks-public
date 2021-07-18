@@ -15,12 +15,12 @@ var observer = new MutationObserver(() => {
 });
 
 try {
-  observer.observe(document.getElementById("PT_MAIN"), {
+  observer.observe(document.body, {
     childList: true,
     subtree: true,
   });
 } catch (error) {
-  console.warn("MutationObserver could not be set up.");
+  console.log("MutationObserver could not be set up.");
 }
 
 function setUp() {
@@ -82,14 +82,14 @@ function addRowRating(rows, data) {
         if (data[fullName]["profRating"] !== -1.0) {
           rating = data[fullName]["profRating"].toFixed(1) + " / 5.0";
           color = colorMapping[data[fullName]["profRatingClass"]];
-          prof.innerHTML = `<a>${originalName}</a>`;
+          prof.innerHTML = `<a target="_blank" rel="noopener noreferrer">${originalName}</a>`;
           prof.children[0].href = data[fullName]["profUrl"];
         }
       } else if (shortName in data) {
         if (data[shortName]["profRating"] !== -1.0) {
           rating = data[shortName]["profRating"].toFixed(1) + " / 5.0";
           color = colorMapping[data[shortName]["profRatingClass"]];
-          prof.innerHTML = `<a>${originalName}</a>`;
+          prof.innerHTML = `<a target="_blank" rel="noopener noreferrer">${originalName}</a>`;
           prof.children[0].href = data[shortName]["profUrl"];
         }
       }
