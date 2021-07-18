@@ -4,8 +4,11 @@ const colorMapping = {
   good: "#6BD175",
 };
 
-var observer = new MutationObserver((mutations) => {
-  if (document.getElementsByClassName("ps_grid-col INSTRUCTOR").length) {
+var observer = new MutationObserver(() => {
+  if (
+    document.getElementsByClassName("ps_grid-col INSTRUCTOR").length === 1 &&
+    document.getElementsByClassName("psc_invisible").length === 0
+  ) {
     setUp();
     observer.disconnect();
   }
@@ -17,22 +20,25 @@ try {
     subtree: true,
   });
 } catch (error) {
-  console.warn("MutationObserver could not be set up.")
+  console.warn("MutationObserver could not be set up.");
 }
 
 function setUp() {
-  fetch(chrome.runtime.getURL("profData.json"))
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log("json data loaded");
-      const table = document.getElementsByClassName("ps_grid-flex")[0];
-      const head = table.children[0].children[0];
-      const rows = table.children[1].children;
+  chrome.storage.sync.get("enabled", (data) => {
+    if (data.enabled) {
+      fetch(chrome.runtime.getURL("profData.json"))
+        .then((resp) => resp.json())
+        .then((data) => {
+          const table = document.getElementsByClassName("ps_grid-flex")[0];
+          const head = table.children[0].children[0];
+          const rows = table.children[1].children;
 
-      addRatingHeader(head);
-      addRowRating(rows, data);
-    })
-    .catch((err) => console.error(err));
+          addRatingHeader(head);
+          addRowRating(rows, data);
+        })
+        .catch((err) => console.error(err));
+    }
+  });
 }
 
 function addRatingHeader(head) {
