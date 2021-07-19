@@ -45,4 +45,4 @@ while profsRemaining:
 
 
 with open("profData.json", "w") as f:
-    dump(profDict, f)
+    dump(profDict, f, ensure_ascii=False)

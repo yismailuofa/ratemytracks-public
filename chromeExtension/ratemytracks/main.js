@@ -4,23 +4,46 @@ const colorMapping = {
   good: "#6BD175",
 };
 
-var observer = new MutationObserver(() => {
+var loadObserver = new MutationObserver((changes) => {
+  console.log(changes)
+  changes.forEach((change) => {
+    if (
+      change.removedNodes.length === 1 &&
+      change.removedNodes[0].textContent === "Loading Complete" &&
+      document.querySelector(".ps_grid-col.INSTRUCTOR") !== null &&
+      document.querySelector(".psc_invisible") === null
+    ) {
+      setUp();
+    }
+  });
+});
+
+var initialObserver = new MutationObserver((changes) => {
   if (
-    document.getElementsByClassName("ps_grid-col INSTRUCTOR").length === 1 &&
-    document.getElementsByClassName("psc_invisible").length === 0
+    document.querySelector(".ps_grid-col.INSTRUCTOR") !== null &&
+    document.querySelector(".psc_invisible") === null
   ) {
     setUp();
-    observer.disconnect();
+    initialObserver.disconnect();
+    const showMore = document.querySelector("#SSR_CLSRCH_F_WK_SSR_CHANGE_BTN")
+    if (showMore !== null) {
+      showMore.addEventListener("click", () => {
+        loadObserver.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });  
+      })
+    }
   }
 });
 
 try {
-  observer.observe(document.body, {
+  initialObserver.observe(document.body, {
     childList: true,
     subtree: true,
   });
 } catch (error) {
-  console.log("MutationObserver could not be set up.");
+  console.warn(error);
 }
 
 function setUp() {
@@ -29,8 +52,8 @@ function setUp() {
       fetch(chrome.runtime.getURL("profData.json"))
         .then((resp) => resp.json())
         .then((data) => {
-          const table = document.getElementsByClassName("ps_grid-flex")[0];
-          const head = table.children[0].children[0];
+          const table = document.querySelector(".ps_grid-flex");
+          const head = table.firstElementChild.firstElementChild;
           const rows = table.children[1].children;
 
           addRatingHeader(head);
@@ -51,21 +74,24 @@ function addRowRating(rows, data) {
     row.insertCell(7);
     row.children[7].outerHTML = "<td></td>";
     row.children[7].appendChild(document.createElement("div"));
-    row.children[7].children[0].appendChild(document.createElement("div"));
-    row.children[7].children[0].children[0].appendChild(
+    row.children[7].firstElementChild.appendChild(
+      document.createElement("div")
+    );
+    row.children[7].firstElementChild.firstElementChild.appendChild(
       document.createElement("span")
     );
     row.children[7].className = "ps_grid-cell RATING";
 
-    const profNames = row.querySelector(".INSTRUCTOR").children[0].children;
+    const profNames =
+      row.querySelector(".INSTRUCTOR").firstElementChild.children;
     let profFound = false;
     let prof = null;
     for (x of profNames) {
       if (
-        x.children[0].innerHTML !== "Staff" &&
-        x.children[0].innerHTML !== "To be Announced"
+        x.firstElementChild.innerHTML !== "Staff" &&
+        x.firstElementChild.innerHTML !== "To be Announced"
       ) {
-        prof = x.children[0];
+        prof = x.firstElementChild;
         profFound = true;
         break;
       }
@@ -83,18 +109,19 @@ function addRowRating(rows, data) {
           rating = data[fullName]["profRating"].toFixed(1) + " / 5.0";
           color = colorMapping[data[fullName]["profRatingClass"]];
           prof.innerHTML = `<a target="_blank" rel="noopener noreferrer">${originalName}</a>`;
-          prof.children[0].href = data[fullName]["profUrl"];
+          prof.firstElementChild.href = data[fullName]["profUrl"];
         }
       } else if (shortName in data) {
         if (data[shortName]["profRating"] !== -1.0) {
           rating = data[shortName]["profRating"].toFixed(1) + " / 5.0";
           color = colorMapping[data[shortName]["profRatingClass"]];
           prof.innerHTML = `<a target="_blank" rel="noopener noreferrer">${originalName}</a>`;
-          prof.children[0].href = data[shortName]["profUrl"];
+          prof.firstElementChild.href = data[shortName]["profUrl"];
         }
       }
     }
-    row.children[7].children[0].children[0].children[0].innerHTML = rating;
+    row.children[7].firstElementChild.firstElementChild.firstElementChild.innerHTML =
+      rating;
     row.children[7].style.fontWeight = "bold";
     row.children[7].style.backgroundColor = color;
   }
