@@ -5,7 +5,6 @@ const colorMapping = {
 };
 
 var loadObserver = new MutationObserver((changes) => {
-  console.log(changes)
   changes.forEach((change) => {
     if (
       change.removedNodes.length === 1 &&
@@ -18,21 +17,21 @@ var loadObserver = new MutationObserver((changes) => {
   });
 });
 
-var initialObserver = new MutationObserver((changes) => {
+var initialObserver = new MutationObserver(() => {
   if (
     document.querySelector(".ps_grid-col.INSTRUCTOR") !== null &&
     document.querySelector(".psc_invisible") === null
   ) {
     setUp();
     initialObserver.disconnect();
-    const showMore = document.querySelector("#SSR_CLSRCH_F_WK_SSR_CHANGE_BTN")
+    const showMore = document.querySelector("#SSR_CLSRCH_F_WK_SSR_CHANGE_BTN");
     if (showMore !== null) {
       showMore.addEventListener("click", () => {
         loadObserver.observe(document.body, {
           childList: true,
           subtree: true,
-        });  
-      })
+        });
+      });
     }
   }
 });
