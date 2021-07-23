@@ -1,7 +1,7 @@
 {
   "name": "RateMyTracks",
   "description": "Get clear insights into professors at the University of Alberta while browsing Beartracks.",
-  "version": "1.1",
+  "version": "1.1.1",
   "manifest_version": 3,
   "icons": {
     "16": "/images/logo16.png",
