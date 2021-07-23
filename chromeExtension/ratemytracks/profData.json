@@ -9474,7 +9474,7 @@
     "profRating": 4.5,
     "profRatingClass": "good"
   },
-  "netzer,orly lael": {
+  "lael netzer,orly": {
     "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=1976283",
     "profRating": 3.5,
     "profRatingClass": "good"
@@ -11838,11 +11838,6 @@
     "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=2615652",
     "profRating": 4.8,
     "profRatingClass": "good"
-  },
-  "netzer,orly": {
-    "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=1926693",
-    "profRating": 3.0,
-    "profRatingClass": "average"
   },
   "akhmetov,ildar": {
     "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=2656579",
@@ -20176,11 +20171,6 @@
   },
   "mcwilliams,daniel": {
     "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=2662852",
-    "profRating": 5.0,
-    "profRatingClass": "good"
-  },
-  "lael netzer,orly": {
-    "profUrl": "https://www.ratemyprofessors.com/ShowRatings.jsp?tid=2280448",
     "profRating": 5.0,
     "profRatingClass": "good"
   },
