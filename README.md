@@ -16,5 +16,5 @@ RateMyTracks uses Javascript to manipulate the DOM and insert ratings and links 
 
 
 ## Creators:
-This project was developed by [Youssef Ismail](https://github.com/yismailuofa/), [Rupin Bapuji](https://www.linkedin.com/in/rupin-bapuji/), [Bennett Wiredu](https://github.com/tanguan2), and [Kourosh Kehtari](https://github.com/kouroshkeh).
+This project was developed by [Youssef Ismail](https://github.com/yismailuofa/), [Rupin Bapuji](https://www.linkedin.com/in/rupin-bapuji/), [Bennett Wiredu](https://github.com/tanguan2), [Jan Prus-Czarnecki](https://github.com/janpc01) and [Kourosh Kehtari](https://github.com/kouroshkeh).
 
